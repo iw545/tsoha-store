@@ -2,7 +2,7 @@
 
 Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä uusia tuotteita
 valikoimaan. Käyttäjät voivat selata tuotteita järjestämällä niitä useilla eri tavoilla. Valitsemalla tuotteen
-käyttäjä voi tarkastella tarkemmin kyseisen tuotteen tietoja.
+käyttäjä voi tarkastella tarkemmin kyseisen tuotteen tietoja (esim. hinta, varastotilanne, käyttäjien antamat arvostelut).
 
 Sovelluksen ominaisuuksia ovat:
 * Käyttäjä voi kirjautua sisään ja luoda oman tunnuksen sovellukseen.
