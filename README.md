@@ -10,7 +10,7 @@ Sovelluksen ominaisuuksia ovat:
 Tämän lisäksi tuotteita voi etsiä tarkemmin esim. hakusanalla, tuotekategorialla, hinnan mukaan (halvimmasta kalliimpaan tai päinvastoin),
 arvostelujen mukaan (suosituimmat tuotteet käyttäjäarvioiden mukaan), tuotteen vanhuuden mukaan (uusimmasta vanhimpaan tai päinvastoin) tai
 myydyimpien tuotteiden mukaan.
-* Käyttäjä voi lisätä tuotteita omaan ostoskoriin, minkä kautta voi ostaa joko yksittäisen tai usean tuotteen kerralla.
+* Käyttäjä voi lisätä tuotteita ostoskoriin, minkä kautta voi ostaa joko yksittäisen tai usean tuotteen kerralla.
 * Käyttäjä voi halutessaan lisätä oman arvosanan tuotteelle ja tämän lisäksi vaihtoehtoisesti myös kommentin. Tuotteiden tiedoissa käyttäjä
 voi myös lukea muiden antamia arvosteluja.
 * Käyttäjä voi selata tuotteita, joita on itse aiemmin ostanut.
