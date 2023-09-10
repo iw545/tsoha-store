@@ -1,6 +1,6 @@
 # Verkkokauppasovellus
 
-Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä lisää tuotteita
+Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä uusia tuotteita
 valikoimaan. Käyttäjät voivat selata tuotteita järjestämällä niitä useilla eri tavoilla. Valitsemalla tuotteen
 käyttäjä voi tarkastella tarkemmin kyseisen tuotteen tietoja.
 
