@@ -26,7 +26,8 @@ $ psql < schema.sql
 Nyt voit käynnistää sovelluksen komennolla
 
 $ flask run
--------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------  
 
 
 Tuotteita lisätään luetteloon seuraavasti PostgreSQL tulkilla (toiminnallisuutta ei vielä lisätty, jolla sovelluksen admin voi sovelluksessa suoraan lisätä tuotteita lomakkeella):
