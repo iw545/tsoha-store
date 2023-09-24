@@ -6,8 +6,8 @@ Tuotteita voi etsiä hakusanalla, mutta niitä ei vielä voi järjestää muilla
 Tällä hetkellä sovellusta voi testata tuotannossa seuraavilla tavoilla:
 - Tuotteiden etsiminen hakusanalla. Tuotteita etsitään "items" luettelosta.
 - Käyttäjätunnuksen luomisella. "Luo käyttäjätunnus" valinnalla sovelluksen etusivulla voi testata käyttäjätunnuksen luomista. Kun käyttäjätunnus on luotu, sovellukseen pystyy kirjautumaan sisään luoduilla käyttäjätunnuksilla. Kun on kirjautunut sisään, pystyy kirjautumaan ulos valitsemalla "kirjaudu ulos" (muuta toiminnallisuutta ei vielä ole toteutettu).
-
-Sovelluksen käynnistysohjeet (sama ohje kuin tsoha kurssin sivuilla: https://hy-tsoha.github.io/materiaali/aikataulu/):
+-------------------------------------------------------------------------------------------------------------------------------------
+Sovelluksen käynnistysohjeet (sama ohje kuin tsoha kurssin sivuilla: https://hy-tsoha.github.io/materiaali/aikataulu/):  
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
 
 DATABASE_URL=<tietokannan-paikallinen-osoite>
@@ -26,7 +26,7 @@ $ psql < schema.sql
 Nyt voit käynnistää sovelluksen komennolla
 
 $ flask run
-
+-------------------------------------------------------------------------------------------------------------------------------------
 
 
 Tuotteita lisätään luetteloon seuraavasti PostgreSQL tulkilla (toiminnallisuutta ei vielä lisätty, jolla sovelluksen admin voi sovelluksessa suoraan lisätä tuotteita lomakkeella):
