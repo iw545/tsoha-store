@@ -12,12 +12,12 @@ Tuotteita lisätään luetteloon seuraavasti PostgreSQL tulkilla (toiminnallisuu
 INSERT INTO items (name, price, category, time, sold, grades)
 VALUES ('ItemName', 9.99, 'ItemCategory', CURRENT_DATE, 0, 0);
 
-Name: tuotteen nimi
-Price: tuotteen hinta
-Category: tuotteen kategoria
-Time: tuotteen lisäämispäivä (älä muuta tätä, CURRENT_DATE asettaa nykyisen päivämäärän automaattisesti sillä hetkellä)
-Sold: myydyt tuotteet (alkaa 0 aina, tätä arvoa päivitetään kun tuotetta ostetaan (toiminnallisuutta ei vielä ole toteutettu))
-Grades: arvosana keskiarvo (1-5 välillä, alkaa 0 aina, tätä arvoa päivitetään kun tuotteelle annetaan arvosanoja ((toiminnallisuutta ei vielä ole toteutettu))
+Name: tuotteen nimi  
+Price: tuotteen hinta  
+Category: tuotteen kategoria  
+Time: tuotteen lisäämispäivä (älä muuta tätä, CURRENT_DATE asettaa nykyisen päivämäärän automaattisesti sillä hetkellä)  
+Sold: myydyt tuotteet (alkaa 0 aina, tätä arvoa päivitetään kun tuotetta ostetaan (toiminnallisuutta ei vielä ole toteutettu))  
+Grades: arvosana keskiarvo (1-5 välillä, alkaa 0 aina, tätä arvoa päivitetään kun tuotteelle annetaan arvosanoja ((toiminnallisuutta ei vielä ole toteutettu))  
 
 "items" luettelon tuotteita voi myös katsoa "Tuote hakemisto" valinnasta, mikä sisältää kaikki tuotteet jotka sinne on lisätty yllä mainitulla tavalla.
 Jos tuotteita hakee tyhjällä hakusanalla, yllä mainitulla tavalla tulee näkyviin kaikki tuotteet luettelossa.
