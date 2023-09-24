@@ -1,5 +1,13 @@
 # Verkkokauppasovellus
 
+Päivitys 24.9.2023:
+Sovelluksessa toimii käyttäjätunnuksen tekeminen ja sovellukseen kirjautuminen luodulla käyttäjätunnuksella.
+Tuotteita voi etsiä hakusanalla, mutta niitä ei vielä voi järjestää muilla eri tavoilla, kuten hinnan mukaan.
+Tällä hetkellä sovellusta voi testata tuotannossa seuraavilla tavoilla:
+- Tuotteiden etsiminen hakusanalla. Tuotteita etsitään "items" luettelosta, joka luodaan seuraavasti PostgreSQL tulkilla:
+
+
+
 Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä uusia tuotteita
 valikoimaan. Käyttäjät voivat selata tuotteita järjestämällä niitä useilla eri tavoilla. Valitsemalla tuotteen
 käyttäjä voi tarkastella tarkemmin kyseisen tuotteen tietoja (esim. hinta, varastotilanne, käyttäjien antamat arvostelut).
