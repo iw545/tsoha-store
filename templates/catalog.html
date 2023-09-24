@@ -1,0 +1,10 @@
+Verkkokaupan tuotteet
+<hr>
+<ul>
+{% for item in items %}
+<li>
+{{ item[0] }}, Hinta: {{ item[1] }}
+<li>
+{% endfor %}
+</ul>
+<hr>

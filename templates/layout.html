@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<h1>Tsoha Store</h1>
+<nav>
+<ul>
+  <li><a href="/catalog">Tuote hakemisto</a></li>
+  <li><a href="/cart">Ostoskori</a></li>
+  <li><a href="/usersettings">Käyttäjätiedot</a></li>
+</ul>
+</nav>
+
+<form action="/search" method="POST">
+<label for="search_term">Tuote haku:</label>
+<input type="text" name="search_term"><br>
+<input type="submit" value="Etsi tuotteita">
+</form>
+<hr>
+{% block content %}
+{% endblock %}
+<hr>
