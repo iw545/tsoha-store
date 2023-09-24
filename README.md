@@ -4,9 +4,27 @@ Päivitys 24.9.2023:
 Sovelluksessa toimii käyttäjätunnuksen tekeminen ja sovellukseen kirjautuminen luodulla käyttäjätunnuksella.
 Tuotteita voi etsiä hakusanalla, mutta niitä ei vielä voi järjestää muilla eri tavoilla, kuten hinnan mukaan.
 Tällä hetkellä sovellusta voi testata tuotannossa seuraavilla tavoilla:
-- Tuotteiden etsiminen hakusanalla. Tuotteita etsitään "items" luettelosta, joka luodaan seuraavasti PostgreSQL tulkilla:
+- Tuotteiden etsiminen hakusanalla. Tuotteita etsitään "items" luettelosta.
+- Käyttäjätunnuksen luomisella. "Luo käyttäjätunnus" valinnalla sovelluksen etusivulla voi testata käyttäjätunnuksen luomista. Kun käyttäjätunnus on luotu, sovellukseen pystyy kirjautumaan sisään luoduilla käyttäjätunnuksilla. Kun on kirjautunut sisään, pystyy kirjautumaan ulos valitsemalla "kirjaudu ulos" (muuta toiminnallisuutta ei vielä ole toteutettu).
+
+Tuotteita lisätään luetteloon seuraavasti PostgreSQL tulkilla (toiminnallisuutta ei vielä lisätty, jolla sovelluksen admin voi sovelluksessa suoraan lisätä tuotteita lomakkeella):
+
+INSERT INTO items (name, price, category, time, sold, grades)
+VALUES ('ItemName', 9.99, 'ItemCategory', CURRENT_DATE, 0, 0);
+
+Name: tuotteen nimi
+Price: tuotteen hinta
+Category: tuotteen kategoria
+Time: tuotteen lisäämispäivä (älä muuta tätä, CURRENT_DATE asettaa nykyisen päivämäärän automaattisesti sillä hetkellä)
+Sold: myydyt tuotteet (alkaa 0 aina, tätä arvoa päivitetään kun tuotetta ostetaan (toiminnallisuutta ei vielä ole toteutettu))
+Grades: arvosana keskiarvo (1-5 välillä, alkaa 0 aina, tätä arvoa päivitetään kun tuotteelle annetaan arvosanoja ((toiminnallisuutta ei vielä ole toteutettu))
+
+"items" luettelon tuotteita voi myös katsoa "Tuote hakemisto" valinnasta, mikä sisältää kaikki tuotteet jotka sinne on lisätty yllä mainitulla tavalla.
+Jos tuotteita hakee tyhjällä hakusanalla, yllä mainitulla tavalla tulee näkyviin kaikki tuotteet luettelossa.
 
 
+-------------------------------------------------------------------------------------------------------------------------------------
+Sovelluksen kuvaus:
 
 Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä uusia tuotteita
 valikoimaan. Käyttäjät voivat selata tuotteita järjestämällä niitä useilla eri tavoilla. Valitsemalla tuotteen
