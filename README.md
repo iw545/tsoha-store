@@ -10,8 +10,8 @@ Tällä hetkellä sovellusta voi testata tuotannossa seuraavilla tavoilla:
 Sovelluksen käynnistysohjeet (sama ohje kuin tsoha kurssin sivuilla: https://hy-tsoha.github.io/materiaali/aikataulu/):  
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
 
-DATABASE_URL=<tietokannan-paikallinen-osoite>
-SECRET_KEY=<salainen-avain>
+DATABASE_URL="tietokannan-paikallinen-osoite"  
+SECRET_KEY="salainen-avain"
 
 Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
 
