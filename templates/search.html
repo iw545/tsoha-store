@@ -1,10 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
 Haku tulokset:
 <hr>
 <ul>
 {% for item in items %}
 <li>
-Tuote: {{ item[0] }}, Hinta: {{ item[1] }}
-<li>
+Tuote: <a href="{{ url_for('item_page', item_id=item[0]) }}">{{ item[1] }}<a> - 
+Hinta: {{ item[2] }}
+</li>
 {% endfor %}
 </ul>
 <hr>
+{% endblock %}

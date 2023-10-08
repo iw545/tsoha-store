@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+Tuote tiedot
+<hr>
+<ul>
+<li>
+{{ item[1] }} - Hinta: {{ item[2] }}<br>
+<form action="/update_cart" method="POST">
+<input type="hidden" name="item_id" value="{{ item[0] }}">
+<input type="hidden" name="option" value="add">
+<input type="submit" value="Lisää ostoskoriin">
+</form>
+</li>
+{% if user_can_review %}
+<form action="/post_review" method="POST">
+<p>Kirjoita arvostelu:<br>
+<input type="text" name="content"></p>
+Arviointi:
+<select name="grade">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+<p>
+<input type="submit" value="Lähetä arvostelu">
+</p>
+</form>
+{% endif %}
+<br>
+Arvostelut<br>
+<ul>
+{% for review in reviews_list %}
+<li>
+{{ review[0] }}  {{ review[1] }}<br>
+{{ review[2] }}
+</li>
+<br>
+<br>
+{% endfor %}
+</ul>
+</ul>
+<hr>
+{% endblock %}
