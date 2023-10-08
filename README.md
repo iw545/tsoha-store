@@ -1,5 +1,20 @@
 # Verkkokauppasovellus
+Päivitys 8.10.2023:
+Suurin osa toiminnoista on nyt lisätty sovellukseen, mutta ne eivät toimi vielä täysin niin kuin pitää.
+Tietokannan taulukoiden dataan viittaamisessa oli hankaluuksia, joten toiminnot eivät lisää käytettävää dataa aina muihin taulukoihin.
+Toimintoja voi testata, vaikkei ne näytä tarvittavaa dataa oikein jokaisessa niistä.
 
+Uudet toiminnot tässä versiossa:
+- Tuotteiden lisääminen ostoskoriin. Jokaisella tuotteella on nyt oma sivu, jossa on vaihtoehto "Lisää ostoskoriin". Klikkaamalla tätä vaihtoehtoa tuote siirtyy ostoskoriin. Ostoskoria voi tarkastella "Ostoskori" vaihtoehdlla sovelluksen sivun ylälaidassa olevista vaihtoehdoista. Tällä hetkellä kuitenkaan tuotteiden nimiä, hintaa eikä niiden määrää näe. Tuotteita voi kuitenkin poistaa ostoskorista valitsemalla vaihtoehdon "Poista ostoskorista" sen tuotteen kohdalla minkä haluaa poistaa. Tuotteet voi myös ostaa valitsemalla "Osta tuotteet" vaihtoehdon, jolloin tuotteet siirtyvät ostettujen tuotteiden listaan (joita ei voi tässä versiossa vielä tarkastella).
+- Tuotearvioiden lisääminen tuotteiden sivuille. Jokaisen tuotteen sivulla on kohta, johon käyttäjä voi kirjoittaa oman arvostelun tuotteesta sekä antaa tuotteelle arvosanan asteikolla 1-5. Kun arvostelun on kirjoittanut, sen voi lähettää klikkaamalla vaihtoehtoa "Lähetä arvostelu". Tässä versiossa arvosteluita eikä arvosanojen keskiarvoa kuitenkaan vielä näe tuotteiden sivuilla.
+
+Edellisessä päivityksessä (Päivitys 24.9.2023) kohdassa voi lukea miten tuotteita voi lisätä tietokantaan, joka toimii samalla tavalla tässäkin versiossa.
+
+Nykyisten toimintojen päivittämisen lisäksi sovellus tarvitsee vielä seuraavat päätoiminnot:
+- Käyttäjä asetukset, joissa käyttäjä voi tarkastella aiemmin ostettuja tuotteitaan. Näissä asetuksissa ylläpitäjällä on vaihtoehto lisätä ja poistaa tuotteita tietokannasta.
+- Tuotteiden selaaminen järjestämällä ne monella eri tavalla, kuten hinnan, tuotekategorian, uutuuden, suosituimpien tuotteiden mukaan.
+
+-------------------------------------------------------------------------------------------------------------------------------------
 Päivitys 24.9.2023:
 Sovelluksessa toimii käyttäjätunnuksen tekeminen ja sovellukseen kirjautuminen luodulla käyttäjätunnuksella.
 Tuotteita voi etsiä hakusanalla, mutta niitä ei vielä voi järjestää muilla eri tavoilla, kuten hinnan mukaan.
