@@ -16,8 +16,14 @@ def index():
 @app.route("/login", methods=["POST"])
 def login():
 
+    notification = ""
     username = request.form["username"]
     password = request.form["password"]
+
+    if len(username) > 20 or len(password) > 20:
+        return redirect("/")
+    if len(username) == 0 or len(password) == 0:
+        return redirect("/")
 
     sql = text("SELECT id, password FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
@@ -32,17 +38,17 @@ def login():
             return redirect("/")
     
         else:
-            # wrong password
-            return redirect("/")
+            notification = "Väärä salasana."
+            return render_template("/index.html", notification=notification)
         
     else:
-        # username not found
-        return redirect("/")
+        notification = "Käyttäjänimeä ei löytynyt."
+        return render_template("/index.html", notification=notification)
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-
+    notification = ""
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -52,16 +58,17 @@ def register():
         user = result.fetchone()
 
         if user:
-            # Username unavailable, choose a different one.
-            return redirect("/register")
+            notification = "Käyttäjänimi ei valittavissa, valitse toinen."
+            return render_template("/register.html", notification=notification)
 
         else:
             hash_value = generate_password_hash(password)
             sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
             db.session.execute(sql, {"username":username, "password":hash_value})
             db.session.commit()
-            # Account registered.
-            return redirect("/")
+
+            notification = "Käyttäjä rekisteröity, voit nyt kirjautua sisään."
+            return render_template("index.html", notification=notification)
 
     return render_template("register.html")
 
@@ -78,22 +85,45 @@ def logout():
 def search():
     if request.method == "POST":
         search_term = request.form.get("search_term")
+        if len(search_term) > 20:
+            return redirect("/")
         if len(search_term) == 0:
-            return redirect("/catalog")
+            return redirect("/")
         
-        sql = text("SELECT id, name, price FROM items WHERE name ILIKE :search_term")
+        sql = text("SELECT id, name, price, category FROM items WHERE name ILIKE :search_term")
         result = db.session.execute(sql, {"search_term": "%" + search_term + "%"})
         items_list = result.fetchall()
 
         return render_template("search.html", items=items_list)
 
-    return redirect("/catalog")
+    return redirect("/")
 
 
-@app.route("/catalog")
+@app.route("/catalog", methods=["GET", "POST"])
 def catalog():
-    # todo: add item sorting by price, category, reviews, date added, most sold
-    sql = text("SELECT id, name, price FROM items")
+    sort_type = request.args.get("sort_type")
+
+    if sort_type == "name_asc":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY name ASC")
+
+    elif sort_type == "name_desc":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY name DESC")
+
+    elif sort_type == "price_asc":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY price ASC")
+
+    elif sort_type == "price_desc":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY price DESC")
+
+    elif sort_type == "most_sold":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY sold DESC")
+
+    elif sort_type == "grade":
+        sql = text("SELECT id, name, price, category, grade FROM items ORDER BY grade DESC")
+
+    else:
+        sql = text("SELECT id, name, price, category, grade FROM items")
+
     result = db.session.execute(sql)
     items_list = result.fetchall()
 
@@ -128,20 +158,21 @@ def item_page(item_id):
 
 @app.route("/cart")
 def cart():
+    notification = ""
     current_user = session.get("user_id")
     if current_user:
         sql_cart = text("SELECT item_id FROM cart")
         cart_items = db.session.execute(sql_cart)
 
         return render_template("cart.html", cart_items=cart_items)
-
-    # not logged in as a user
-    # display message to log in
-    return redirect("/")
+    
+    notification = "Kirjaudu sisään nähdäksesi ostoskorin."
+    return render_template("/index.html", notification=notification)
 
 
 @app.route("/update_cart", methods=["POST"])
 def update_cart():
+    notification = ""
     option = request.form.get("option")
     item_id = request.form.get("item_id")
 
@@ -157,15 +188,21 @@ def update_cart():
         sql_item = text("DELETE FROM cart WHERE item_id = :item_id")
         db.session.execute(sql_item, {"item_id": item_id})
         db.session.commit()
-        
-    return redirect("/cart")
+
+    notification = "Ostoskori päivitetty."
+    return render_template("cart.html", notification=notification)
 
 
 @app.route("/purchase_items", methods=["POST"])
 def purchase():
 
+    notification = ""
     sql_cart = text("SELECT user_id, item_id FROM cart")
     cart_items = db.session.execute(sql_cart)
+    if len(cart_items) == 0:
+        notification = "Ostoskori tyhjä, ostosta ei voi suorittaa."
+        return render_template("cart.html", notification=notification)
+
     # add the cart items to bought table
     for item in cart_items:
         sql_item = text("INSERT INTO bought (user_id, item_id, time) VALUES (:user_id, :item_id, current_date)")
@@ -180,7 +217,7 @@ def purchase():
     return render_template("purchase_made.html")
 
 
-@app.route("/post_review", methods=["POST"])
+@app.route("/post_review", methods=["GET"])
 def user_review():
     content = request.form.get("content")
     grade = request.form.get("grade")
@@ -198,4 +235,12 @@ def usersettings():
     # show item reviews written by user
     # if admin user: add functionality to add and remove
     # items from the database via admin settings section
-    return render_template("usersettings.html")
+
+    notification = ""
+    current_user = session.get("user_id")
+    if current_user:
+
+        return render_template("usersettings.html")
+    
+    notification = "Kirjaudu sisään nähdäksesi käyttäjäasetukset."
+    return render_template("index.html", notification=notification)

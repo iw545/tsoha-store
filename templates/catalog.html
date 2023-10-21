@@ -1,14 +1,42 @@
 {% extends "layout.html" %}
 {% block content %}
 Verkkokaupan tuotteet
+<br>
+<form action="/catalog" method="GET">
+	<select name="sort_type">
+		<option value="name_asc">Nimi A - Ö</option>
+		<option value="name_desc">Nimi Ö - A</option>
+		<option value="price_asc">Halvimmat</option>
+		<option value="price_desc">Kalleimmat</option>
+		<option value="most_sold">Myydyimmät</option>
+		<option value="grade">Arvosana</option>
+	</select>
+	<p>
+	<input type="submit" value="Järjestä">
+	</p>
+</form>
 <hr>
-<ul>
-{% for item in items %}
-<li>
-Tuote: <a href="{{ url_for('item_page', item_id=item[0]) }}">{{ item[1] }}<a>
- - Hinta: {{ item[2] }}
-</li>
-{% endfor %}
-</ul>
+Nimi
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Hinta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Kategoria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<hr>
+	<table>
+		<ul>
+			{% for item in items %}
+			<tr>
+				<td>
+				<a href="{{ url_for('item_page', item_id=item[0]) }}">{{ item[1] }}<a>&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+				{{ item[2] }}&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+				{{ item[3] }}&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+			{% endfor %}
+		</ul>
+	</table>
 <hr>
 {% endblock %}

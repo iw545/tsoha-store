@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-Ostoskorissa olevat tuotteet:<br>
-{% for item in cart_items %}
-<li>
-Tuote: {{ item.name }} - Hinta: {{ item.hinta }}
-<form action="/update_cart" method="POST">
-<input type="hidden" name="item_id" value="{{ item[0] }}">
-<input type="hidden" name="option" value="remove">
-<input type="submit" value="Poista ostoskorista">
-</form>
-</li>
-<br>
-{% endfor %}
-<br>
-<form action="/purchase_items" method="POST">
-<input type="submit" value="Osta tuotteet">
-</form>
+	Ostoskorissa olevat tuotteet:<br>
+	{% for item in cart_items %}
+		<li>
+			Tuote: {{ item.name }} - Hinta: {{ item.hinta }}
+			<form action="/update_cart" method="POST">
+				<input type="hidden" name="item_id" value="{{ item[0] }}">
+				<input type="hidden" name="option" value="remove">
+				<input type="submit" value="Poista ostoskorista">
+			</form>
+		</li>
+		<br>
+	{% endfor %}
+	<br>
+	<form action="/purchase_items" method="POST">
+		<input type="submit" value="Osta tuotteet">
+	</form>
 {% endblock %}

@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if session.username %}
-<p>Kirjautunut käyttäjä: {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-</form>
-<a href="/register">Luo käyttäjätunnus</a>
+	<p>Kirjautunut käyttäjä: {{ session.username }}</p>
+	<a href="/logout">Kirjaudu ulos</a>
+	{% else %}
+	<form action="/login" method="POST">
+		<p>Tunnus:<br>
+		<input type="text" name="username" maxlength="20" required></p>
+		<p>Salasana:<br>
+		<input type="password" name="password" maxlength="20" required></p>
+		<input type="submit" value="Kirjaudu">
+	</form>
+	<a href="/register">Luo käyttäjätunnus</a>
 {% endif %}
 <p>
-Olet sivuston {{ counter }}. kävijä
+	Olet sivuston {{ counter }}. kävijä
+</p>
 {% endblock %}
