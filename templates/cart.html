@@ -3,7 +3,7 @@
 	Ostoskorissa olevat tuotteet:<br>
 	{% for item in cart_items %}
 		<li>
-			Tuote: {{ item.name }} - Hinta: {{ item.hinta }}
+			Tuote: {{ item.name }} - Hinta: {{ item.price }}
 			<form action="/update_cart" method="POST">
 				<input type="hidden" name="item_id" value="{{ item[0] }}">
 				<input type="hidden" name="option" value="remove">

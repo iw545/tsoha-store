@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-
-
-
-
+		<ul>
+		  <li><a href="/user_reviews">Kirjoitetut tuotearvostelut</a></li>
+		  <li><a href="/user_purchases">Ostetut tuotteet</a></li>
+		  {% if is_admin %}
+		  <li><a href="/all_purchases">Myydyt tuotteet (admin)</a></li>
+		  <li><a href="/item_tools">Lisää uusia tuotteita valikoimaan (admin)</a></li>
+		  {% endif %}
+		</ul>
 {% endblock %}

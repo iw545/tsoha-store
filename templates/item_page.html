@@ -4,6 +4,8 @@
 	<hr>
 	<li>
 	{{ item[1] }} - Hinta: {{ item[2] }} - Kategoria: {{ item[3] }}<br>
+	Arvosana (1-5): {{ avg_grade }}<br>
+	Arvosanojen määrä: {{ grades }}
 	<form action="/update_cart" method="POST">
 		<input type="hidden" name="item_id" value="{{ item[0] }}">
 		<input type="hidden" name="option" value="add">
@@ -11,29 +13,35 @@
 	</form>
 	</li>
 	{% if user_can_review %}
-		<form action="/post_review" method="GET">
-		<p>Kirjoita arvostelu:<br>
-		<input type="text" name="content"></p>
-		Arvosana:
-		<select name="grade">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select>
-		<p>
-		<input type="submit" value="Lähetä arvostelu">
-		</p>
+		<form action="/post_review" method="POST">
+			<p>Kirjoita arvostelu:<br>
+			<input type="text" name="content">
+			<input type="hidden" name="item_id" value="{{ item[0] }}"></p>
+			Arvosana:
+			<select name="grade">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			<p>
+			<input type="submit" value="Lähetä arvostelu">
+			</p>
 		</form>
 	{% endif %}
 	<br>
-	Arvostelut<br>
+	<hr>
+	Käyttäjien antamat arvostelut<br>
 	<ul>
-		{% for review in reviews_list %}
+		{% for review in reviews %}
 			<li>
-			{{ review[0] }}  {{ review[1] }}<br>
+			{{ review[0] }}<br>
+			<hr>
+			Arvosana: {{ review[3] }}<br>
+			<hr>
 			{{ review[2] }}
+			<hr>
 			</li>
 			<br>
 			<br>

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+	<hr>
+	Aiemmin ostamasi tuotteet:<br>
+	<ul>
+		{% for item in user_purchases %}
+			<li>
+			<hr>
+			Tuote: {{ item.name }} - Hinta: {{ item.price }} - Ostopäivä: {{ item.purchase_time }}
+			<hr>
+			</li>
+			<br>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+Lisää uusi tuote valikoimaan:
+<hr>
+	<form action="/item_tools" method="POST">
+		<p>Nimi:<br>
+		<input type="text" name="name" maxlength="20" required></p>
+		<p>Hinta:<br>
+		<input type="numeric" name="price" maxlength="20" required></p>
+		<p>Kategoria:<br>
+		<input type="text" name="category" maxlength="20" required></p>
+		<hr>
+		<input type="submit" value="Lisää tuote">
+	</form>
+<p>
+{% endblock %}
