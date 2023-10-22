@@ -1,4 +1,59 @@
 # Verkkokauppasovellus
+
+Tällä sovelluksella käyttäjä voi selata verkkokaupan tuotteita sekä ostaa ja arvostella niitä.
+Tuotteita voi selata monella eri tavalla, kuten:
+- hakusanalla
+- järjestämällä tuotteet esim aakkosjärjestykseen, hinnan tai kategorian mukaan.
+- selaamalla kaikkia tuotteita tuotekatalogissa
+
+Käyttäjä voi lisätä haluamansa tuotteet ostoskoriin tuotteiden omien sivujen kautta. Ostoskoria voi tarkastella sivun
+ylälaidassa olevasta linkistä ja kaikki ostoskorissa olevat tuotteet voi ostaa kerralla. Tuotteita voi myös poistaa ostoskorista.
+
+Kun käyttäjä on ostanut tuotteen, voi hän käydä kirjoittamassa tuotteelle arvostelun tuotteen omalla sivulla.
+Arvostelun yhteydessä tuotteelle annetaan myös arvosana väliltä 1-5. Jokaisen tuotteen sivulla lukee sen oma arvosanojen keskiarvo.
+Muiden käyttäjien arvosteluita jokaisella tuotteella voi selata myös.
+
+Sivuston ylläpitäjä voi helposti lisätä uusia tuotteita valikoimaan ja tarkastella kaikkien käyttäjien ostamia tuotteita.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Sovelluksen käynnistysohjeet (sama ohje kuin tsoha kurssin sivuilla: https://hy-tsoha.github.io/materiaali/aikataulu/):  
+Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+
+DATABASE_URL="tietokannan-paikallinen-osoite"  
+SECRET_KEY="salainen-avain"
+
+Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
+
+$ python3 -m venv venv  
+$ source venv/bin/activate  
+$ pip install -r ./requirements.txt  
+
+Määritä vielä tietokannan skeema komennolla:
+
+$ psql < schema.sql  
+
+Nyt voit käynnistää sovelluksen komennolla:
+
+$ flask run  
+
+
+Normaalista käyttäjästä voidaan tehdä Admin käyttäjä seuraavasti postgreSQL-tulkin kautta:
+UPDATE users SET admin = TRUE WHERE username = 'username here';
+
+'username_here' kohtaan kirjoitetaan käyttäjänimi, joka on rekisteröity sovelluksen kautta ensin (sovelluksen pääsivulla).
+Admin käyttäjä voi käyttää admin asetuksia "käyttäjätiedot" sivulla:
+- Myydyt tuotteet (admin): selaa käyttäjien ostamia tuotteita
+- Lisää uusia tuotteita valikoimaan (admin): tämän kautta voi lisätä tuotteita kirjoittamalla jokaiselle tuotteelle erikseen nimen, hinnan ja kategorian.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Päivitys 22.10.2023:
+Seuraavat toiminnot on nyt sovellukseen lisätty ja aikaisemmat toiminnot, jotka eivät toimineet kuten pitää, ovat nyt korjattu:
+- Käyttäjätiedoissa voi normaalit käyttäjät tarkastella aikaisempia ostoksiaan ja tuotearvostelujaan. Admin käyttäjät voivat tarkastella kaikkia ostettuja tuotteita ja lisätä uusia tuotteita valikoimaan.
+- Ostoskoriin voi lisätä tuotteita normaalisti ja ostaa ne sieltä, jolloin ne siirtyvät tarvittaviin taulukoihin.
+- Tuotteita voi järjestää eri tavoin tuotekatalogissa kuten nimen, hinnan tai kategorian mukaan.
+- Koodia on paranneltu monissa kohtaa ja siistitty helpommin luettavaan kuntoon.
+
+-------------------------------------------------------------------------------------------------------------------------------------
 Päivitys 8.10.2023:
 Suurin osa toiminnoista on nyt lisätty sovellukseen, mutta ne eivät toimi vielä täysin niin kuin pitää.
 Tietokannan taulukoiden dataan viittaamisessa oli hankaluuksia, joten toiminnot eivät lisää käytettävää dataa aina muihin taulukoihin.
@@ -22,47 +77,10 @@ Tällä hetkellä sovellusta voi testata tuotannossa seuraavilla tavoilla:
 - Tuotteiden etsiminen hakusanalla. Tuotteita etsitään "items" luettelosta.
 - Käyttäjätunnuksen luomisella. "Luo käyttäjätunnus" valinnalla sovelluksen etusivulla voi testata käyttäjätunnuksen luomista. Kun käyttäjätunnus on luotu, sovellukseen pystyy kirjautumaan sisään luoduilla käyttäjätunnuksilla. Kun on kirjautunut sisään, pystyy kirjautumaan ulos valitsemalla "kirjaudu ulos" (muuta toiminnallisuutta ei vielä ole toteutettu).
 -------------------------------------------------------------------------------------------------------------------------------------
-Sovelluksen käynnistysohjeet (sama ohje kuin tsoha kurssin sivuilla: https://hy-tsoha.github.io/materiaali/aikataulu/):  
-Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
-
-DATABASE_URL="tietokannan-paikallinen-osoite"  
-SECRET_KEY="salainen-avain"
-
-Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
-
-$ python3 -m venv venv  
-$ source venv/bin/activate  
-$ pip install -r ./requirements.txt  
-
-Määritä vielä tietokannan skeema komennolla  
-
-$ psql < schema.sql  
-
-Nyt voit käynnistää sovelluksen komennolla  
-
-$ flask run  
-
--------------------------------------------------------------------------------------------------------------------------------------  
-
-
-Tuotteita lisätään luetteloon seuraavasti PostgreSQL tulkilla (toiminnallisuutta ei vielä lisätty, jolla sovelluksen admin voi sovelluksessa suoraan lisätä tuotteita lomakkeella):
-
-INSERT INTO items (name, price, category, time, sold, grades)
-VALUES ('ItemName', 9.99, 'ItemCategory', CURRENT_DATE, 0, 0);
-
-Name: tuotteen nimi  
-Price: tuotteen hinta  
-Category: tuotteen kategoria  
-Time: tuotteen lisäämispäivä (älä muuta tätä, CURRENT_DATE asettaa nykyisen päivämäärän automaattisesti sillä hetkellä)  
-Sold: myydyt tuotteet (alkaa 0 aina, tätä arvoa päivitetään kun tuotetta ostetaan (toiminnallisuutta ei vielä ole toteutettu))  
-Grades: arvosana keskiarvo (1-5 välillä, alkaa 0 aina, tätä arvoa päivitetään kun tuotteelle annetaan arvosanoja ((toiminnallisuutta ei vielä ole toteutettu))  
-
-"items" luettelon tuotteita voi myös katsoa "Tuote hakemisto" valinnasta, mikä sisältää kaikki tuotteet jotka sinne on lisätty yllä mainitulla tavalla.
-Jos tuotteita hakee tyhjällä hakusanalla, yllä mainitulla tavalla tulee näkyviin kaikki tuotteet luettelossa.
 
 
 -------------------------------------------------------------------------------------------------------------------------------------
-Sovelluksen kuvaus:
+Alkuperäinen sovelluksen kuvaus (sovelluksen suunnittelu vaihe):
 
 Tällä sovelluksella selataan yksittäisen verkkokaupan tuotteita. Sovelluksen ylläpitäjä voi lisätä uusia tuotteita
 valikoimaan. Käyttäjät voivat selata tuotteita järjestämällä niitä useilla eri tavoilla. Valitsemalla tuotteen
